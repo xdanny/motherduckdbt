@@ -1,0 +1,14 @@
+nba_dbt_project:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../../data/nba_analytics.duckdb # Path relative to this profiles.yml file
+      # Example: if profiles.yml is in /app/nba_mvp_dashboard/dbt_project/nba_dbt_project/
+      # this path becomes /app/nba_mvp_dashboard/data/nba_analytics.duckdb
+      threads: 1
+    # Optional: configure a prod target if needed later
+    # prod:
+    #   type: duckdb
+    #   path: ../../data/nba_analytics_prod.duckdb
+    #   threads: 4

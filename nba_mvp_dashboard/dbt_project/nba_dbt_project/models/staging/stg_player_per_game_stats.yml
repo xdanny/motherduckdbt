@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: stg_player_per_game_stats
+    description: "Staging model for NBA player per game statistics. Cleansed and typed data from the raw source. Filters out header rows and rows with missing critical data like player name, games played, or points."
+    columns:
+      - name: rk
+        description: "Rank by original source sorting."
+      - name: player_name
+        description: "Name of the player."
+      - name: pos
+        description: "Player's primary position."
+      - name: age
+        description: "Player's age at the start of the season."
+      - name: tm
+        description: "Team abbreviation. 'TOT' for players traded mid-season (represents total stats across teams)."
+      - name: g
+        description: "Games played."
+      - name: gs
+        description: "Games started."
+      - name: mp
+        description: "Minutes played per game."
+      - name: fg
+        description: "Field goals made per game."
+      - name: fga
+        description: "Field goals attempted per game."
+      - name: fg_pct
+        description: "Field goal percentage (FG / FGA)."
+      - name: fg3p
+        description: "3-point field goals made per game."
+      - name: fg3a
+        description: "3-point field goals attempted per game."
+      - name: fg3_pct
+        description: "3-point field goal percentage (FG3P / FG3A)."
+      - name: fg2p
+        description: "2-point field goals made per game."
+      - name: fg2a
+        description: "2-point field goals attempted per game."
+      - name: fg2_pct
+        description: "2-point field goal percentage (FG2P / FG2A)."
+      - name: efg_pct
+        description: "Effective field goal percentage. Adjusts for the fact that 3-point field goals are worth more than 2-point field goals. Formula: (FG + 0.5 * 3P) / FGA."
+      - name: ft
+        description: "Free throws made per game."
+      - name: fta
+        description: "Free throws attempted per game."
+      - name: ft_pct
+        description: "Free throw percentage (FT / FTA)."
+      - name: orb_per_game
+        description: "Offensive rebounds per game."
+      - name: drb_per_game
+        description: "Defensive rebounds per game."
+      - name: trb_per_game
+        description: "Total rebounds per game (ORB + DRB)."
+      - name: ast_per_game
+        description: "Assists per game."
+      - name: stl_per_game
+        description: "Steals per game."
+      - name: blk_per_game
+        description: "Blocks per game."
+      - name: tov_per_game
+        description: "Turnovers per game."
+      - name: pf_per_game
+        description: "Personal fouls per game."
+      - name: pts_per_game
+        description: "Points per game."
+      - name: awards
+        description: "Player awards for the season (e.g., MVP, All-Star). Raw text from source."

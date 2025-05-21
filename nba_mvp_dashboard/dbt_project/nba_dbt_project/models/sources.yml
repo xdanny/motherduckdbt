@@ -1,0 +1,88 @@
+version: 2
+
+sources:
+  - name: raw_nba_stats
+    description: "Source data for NBA player statistics from Basketball-Reference.com."
+    meta:
+      external_location: "../../data/nba_2023_per_game_stats.csv"
+    tables:
+      - name: player_per_game_stats
+        description: "Raw player per game statistics for the 2023 NBA season."
+        columns:
+          - name: Rk
+            description: "Rank"
+            dtype: VARCHAR
+          - name: Player
+            description: "Player's name"
+            dtype: VARCHAR
+          - name: Pos
+            description: "Position"
+            dtype: VARCHAR
+          - name: Age
+            description: "Player's age"
+            # Let duckdb infer or try_cast later, could be VARCHAR too
+          - name: Team
+            description: "Team abbreviation"
+            dtype: VARCHAR
+          - name: G
+            description: "Games played"
+          - name: GS
+            description: "Games started"
+          - name: MP
+            description: "Minutes played per game"
+          - name: FG
+            description: "Field goals made per game"
+          - name: FGA
+            description: "Field goals attempted per game"
+          - name: "FG%"
+            description: "Field goal percentage"
+            quote: true
+          - name: "3P"
+            description: "3-point field goals made per game"
+            quote: true
+          - name: "3PA"
+            description: "3-point field goals attempted per game"
+            quote: true
+          - name: "3P%"
+            description: "3-point field goal percentage"
+            quote: true
+          - name: "2P"
+            description: "2-point field goals made per game"
+            quote: true
+          - name: "2PA"
+            description: "2-point field goals attempted per game"
+            quote: true
+          - name: "2P%"
+            description: "2-point field goal percentage"
+            quote: true
+          - name: "eFG%"
+            description: "Effective field goal percentage"
+            quote: true
+          - name: FT
+            description: "Free throws made per game"
+          - name: FTA
+            description: "Free throws attempted per game"
+          - name: "FT%"
+            description: "Free throw percentage"
+            quote: true
+          - name: ORB
+            description: "Offensive rebounds per game"
+          - name: DRB
+            description: "Defensive rebounds per game"
+          - name: TRB
+            description: "Total rebounds per game"
+          - name: AST
+            description: "Assists per game"
+          - name: STL
+            description: "Steals per game"
+          - name: BLK
+            description: "Blocks per game"
+          - name: TOV
+            description: "Turnovers per game"
+          - name: PF
+            description: "Personal fouls per game"
+          - name: PTS
+            description: "Points per game"
+          - name: Awards # This column might not exist in all rows or be empty
+            description: "Player awards for the season"
+            dtype: VARCHAR

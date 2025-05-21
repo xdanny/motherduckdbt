@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: mvp_candidates
+    description: "Mart model identifying potential MVP candidates based on a defined set of criteria. This model filters players from the intermediate player statistics summary who meet baseline performance thresholds typically associated with MVP contention (e.g., minimum games played, high points per game)."
+    columns:
+      - name: player_name
+        description: "Name of the player."
+      - name: pos
+        description: "Player's primary position."
+      - name: age
+        description: "Player's age at the start of the season."
+      - name: team_abbreviation
+        description: "Team abbreviation for the player's team."
+      - name: games_played
+        description: "Total games played by the player."
+      - name: games_started
+        description: "Total games started by the player."
+      - name: minutes_played_per_game
+        description: "Average minutes played per game."
+      - name: pts_per_game
+        description: "Average points scored per game. Used for filtering (>= 20) and sorting."
+      - name: total_rebounds_per_game
+        description: "Average total rebounds per game."
+      - name: assists_per_game
+        description: "Average assists per game."
+      - name: steals_per_game
+        description: "Average steals per game."
+      - name: blocks_per_game
+        description: "Average blocks per game."
+      - name: field_goal_percentage
+        description: "Player's field goal percentage."
+      - name: three_point_percentage
+        description: "Player's 3-point field goal percentage."
+      - name: free_throw_percentage
+        description: "Player's free throw percentage."
+      - name: effective_field_goal_percentage
+        description: "Player's effective field goal percentage."
+      - name: turnovers_per_game
+        description: "Average turnovers committed per game."
+      - name: personal_fouls_per_game
+        description: "Average personal fouls committed per game."

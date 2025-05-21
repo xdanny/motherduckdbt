@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: int_player_stats_summary
+    description: "Intermediate model presenting a summary of key player statistics per game. This model acts as a pass-through from the staging layer, selecting essential stats for analytical models. It uses standardized column names from the staging model."
+    columns:
+      - name: player_name
+        description: "Name of the player."
+      - name: pos
+        description: "Player's primary position."
+      - name: age
+        description: "Player's age at the start of the season."
+      - name: team_abbreviation
+        description: "Team abbreviation (e.g., LAL for Los Angeles Lakers). 'TOT' for players traded mid-season, representing total stats across all teams played for during the season."
+      - name: games_played
+        description: "Total games played by the player in the season."
+      - name: games_started
+        description: "Total games started by the player in the season."
+      - name: minutes_played_per_game
+        description: "Average minutes played per game."
+      - name: pts_per_game
+        description: "Average points scored per game."
+      - name: total_rebounds_per_game
+        description: "Average total rebounds (offensive + defensive) per game."
+      - name: assists_per_game
+        description: "Average assists per game."
+      - name: steals_per_game
+        description: "Average steals per game."
+      - name: blocks_per_game
+        description: "Average blocks per game."
+      - name: field_goal_percentage
+        description: "Field goal percentage (FG / FGA)."
+      - name: three_point_percentage
+        description: "3-point field goal percentage (FG3 / FG3A)."
+      - name: free_throw_percentage
+        description: "Free throw percentage (FT / FTA)."
+      - name: effective_field_goal_percentage
+        description: "Effective field goal percentage, adjusting for 3-point shots being worth more. Formula: (FG + 0.5 * 3P) / FGA."
+      - name: turnovers_per_game
+        description: "Average turnovers committed per game."
+      - name: personal_fouls_per_game
+        description: "Average personal fouls committed per game."
