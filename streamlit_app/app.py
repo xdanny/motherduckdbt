@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # --- Configuration ---
-DB_PATH = '../data/nba_analytics.duckdb' # Relative path to the DuckDB file
+DB_PATH = '../data/nba_analytics.duckdb' # Relative path to the DuckDB file from streamlit_app directory
 
 # --- Helper Functions ---
 @st.cache_data # Cache the data loading to improve performance

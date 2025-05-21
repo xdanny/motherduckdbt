@@ -20,7 +20,7 @@ This project fetches NBA player statistics for the 2023 season from [Basketball-
 The project is organized as follows:
 
 ```
-nba_mvp_dashboard/
+./
 ├── data/                     # Stores raw CSV data and the DuckDB database file.
 │   ├── nba_2023_per_game_stats.csv
 │   └── nba_analytics.duckdb
@@ -61,23 +61,33 @@ nba_mvp_dashboard/
     *(If you're running this in a provided environment, the files are likely already present.)*
     ```bash
     # git clone <repository_url>
-    # cd nba_mvp_dashboard
     ```
 
 2.  **Navigate to the project root directory:**
-    If you've just cloned, you should already be there. The root directory is `nba_mvp_dashboard/`.
+    If you've just cloned, you should already be there.
 
 3.  **Install Python dependencies with UV:**
-    We use UV for Python environment management as it's faster than pip:
+    This project uses UV for Python environment management as it's significantly faster than pip.
     ```bash
-    # Install UV if you don't have it
+    # Install UV if you don't have it (one-time setup)
     curl -fsSL https://astral.sh/uv/install.sh | bash
+    # If curl fails, ensure you have curl installed or use another method from https://github.com/astral-sh/uv
 
-    # Create a virtual environment and install dependencies
+    # Create a virtual environment using UV
     uv venv .venv
+
+    # Activate the virtual environment
     source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+    # Install dependencies from requirements.txt using UV
     uv pip install -r requirements.txt
     ```
+
+    UV Benefits:
+    - Much faster than pip (typically 10-100x faster)
+    - Reliable dependency resolution
+    - Built-in virtual environment management
+    - Compatible with standard pip requirements.txt files
 
 ## Running the Project
 
@@ -87,16 +97,16 @@ Follow these steps in order to fetch data, transform it, and view the dashboard.
 
 This step uses the `fetch_data.py` script to scrape player per-game statistics for the 2023 NBA season from [Basketball-Reference.com](https://www.basketball-reference.com/).
 
-1.  Ensure you are in the project root directory (`nba_mvp_dashboard/`).
+1.  Ensure you are in the project root directory and have activated the virtual environment.
 2.  Run the script:
     ```bash
     python scripts/fetch_data.py
     ```
-3.  This will create (or overwrite) the `nba_mvp_dashboard/data/nba_2023_per_game_stats.csv` file.
+3.  This will create (or overwrite) the `data/nba_2023_per_game_stats.csv` file.
 
 ### Step 2: Run dbt Models
 
-This step processes the raw CSV data, transforms it using dbt, and loads it into the DuckDB data warehouse (`nba_mvp_dashboard/data/nba_analytics.duckdb`).
+This step processes the raw CSV data, transforms it using dbt, and loads it into the DuckDB data warehouse (`data/nba_analytics.duckdb`).
 
 1.  Navigate to the dbt project directory:
     ```bash
@@ -123,7 +133,7 @@ This step processes the raw CSV data, transforms it using dbt, and loads it into
 
 This step starts the Streamlit web application to view the MVP candidates and their statistics.
 
-1.  Ensure you are in the project root directory (`nba_mvp_dashboard/`).
+1.  Ensure you are in the project root directory and the virtual environment is activated.
 2.  Run the Streamlit application:
     ```bash
     streamlit run streamlit_app/app.py
@@ -148,6 +158,44 @@ Key dbt models include:
 *   **Player profile pages:** Clicking on a player could lead to a more detailed statistics page.
 *   **Enhanced data fetching:** Add error resilience, logging, and potentially support for other data sources.
 *   **Comprehensive dbt tests:** Add more specific data quality tests to the dbt models.
+
+## Using UV for Python Environment Management
+
+UV is the recommended tool for Python package management in this project. Here are some common commands:
+
+### Key UV Commands
+
+```bash
+# Create a virtual environment
+uv venv .venv
+
+# Activate the virtual environment
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install packages from requirements.txt
+uv pip install -r requirements.txt
+
+# Install a specific package
+uv pip install package_name
+
+# Update a package to the latest version
+uv pip install --upgrade package_name
+
+# Generate a requirements.txt file from your environment
+uv pip freeze > requirements.txt
+
+# Show installed packages
+uv pip list
+```
+
+### Why UV?
+
+- **Speed**: UV is written in Rust and is significantly faster than pip (10-100x in many cases)
+- **Reliability**: Better dependency resolution and caching
+- **Compatibility**: Works with existing Python tooling (pip, requirements.txt, etc.)
+- **Unified Tool**: Combines virtualenv and pip functionality in a single tool
+
+For more information, visit the [UV GitHub repository](https://github.com/astral-sh/uv).
 
 ---
 This README provides a guide to understanding, setting up, and running the NBA MVP Dashboard project.
