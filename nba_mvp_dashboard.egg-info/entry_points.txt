@@ -1,0 +1,2 @@
+[console_scripts]
+run-dashboard = streamlit:main.run_command

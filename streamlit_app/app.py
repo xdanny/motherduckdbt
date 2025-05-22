@@ -500,19 +500,39 @@ else:
             'field_goal_percentage': 'mean'
         }).reset_index()
         
-        # Create a radar chart using Plotly
+        # Create a radar chart using Plotly - fixed to handle variable position counts
         categories = ['Scoring', 'Rebounds', 'Assists', 'Steals', 'Blocks', 'FG%']
+        
+        # Create a new dataframe in the long format required by plotly for polar charts
+        radar_data = pd.DataFrame()
+        for pos in pos_stats['pos'].unique():
+            pos_row = pos_stats[pos_stats['pos'] == pos].iloc[0]
+            for i, category in enumerate(categories):
+                if category == 'Scoring':
+                    value = pos_row['pts_per_game']/pos_stats['pts_per_game'].max()
+                elif category == 'Rebounds':
+                    value = pos_row['total_rebounds_per_game']/pos_stats['total_rebounds_per_game'].max()
+                elif category == 'Assists':
+                    value = pos_row['assists_per_game']/pos_stats['assists_per_game'].max()
+                elif category == 'Steals':
+                    value = pos_row['steals_per_game']/pos_stats['steals_per_game'].max()
+                elif category == 'Blocks':
+                    value = pos_row['blocks_per_game']/pos_stats['blocks_per_game'].max()
+                elif category == 'FG%':
+                    value = pos_row['field_goal_percentage']/pos_stats['field_goal_percentage'].max()
+                
+                radar_data = pd.concat([radar_data, pd.DataFrame({
+                    'Position': pos,
+                    'Category': category,
+                    'Value': value
+                }, index=[0])], ignore_index=True)
+        
         fig = px.line_polar(
-            pos_stats,
-            r=[pos_stats['pts_per_game']/pos_stats['pts_per_game'].max(),
-               pos_stats['total_rebounds_per_game']/pos_stats['total_rebounds_per_game'].max(),
-               pos_stats['assists_per_game']/pos_stats['assists_per_game'].max(),
-               pos_stats['steals_per_game']/pos_stats['steals_per_game'].max(),
-               pos_stats['blocks_per_game']/pos_stats['blocks_per_game'].max(),
-               pos_stats['field_goal_percentage']/pos_stats['field_goal_percentage'].max()],
-            theta=categories,
+            radar_data, 
+            r='Value', 
+            theta='Category',
+            color='Position', 
             line_close=True,
-            color='pos',
             title="Normalized Statistical Profile by Position",
             labels={'r': 'Normalized Value', 'theta': 'Statistic', 'color': 'Position'}
         )
