@@ -136,7 +136,7 @@ This step starts the Streamlit web application to view the MVP candidates and th
 1.  Ensure you are in the project root directory and the virtual environment is activated.
 2.  Run the Streamlit application:
     ```bash
-    streamlit run streamlit_app/app.py
+    ./run_dashboard.sh
     ```
 3.  Streamlit will typically open the dashboard automatically in your default web browser. If not, it will display a local URL (e.g., `http://localhost:8501`) that you can navigate to.
 
